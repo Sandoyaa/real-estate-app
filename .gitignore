@@ -37,7 +37,10 @@ yarn-error.*
 *.tsbuildinfo
 
 app-example
+.env.local
 
 # generated native folders
 /ios
 /android
+/CLAUDE.md
+/.claude/
