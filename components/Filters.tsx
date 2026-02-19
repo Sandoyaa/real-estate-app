@@ -14,17 +14,17 @@ const Filters = () => {
       return;
     }
     setSelectedCategory(category);
-    router.setParams({ filter: 'Category' });
+    router.setParams({ filter: category });
   };
   return (
-    <ScrollView horizontal showsHorizontalScrollIndicator={false} className="mt-3 mb-2">
+    <ScrollView horizontal showsHorizontalScrollIndicator={false} className="mt-3 mb-2" contentContainerClassName="px-5">
       {categories.map((item, index) => (
         <TouchableOpacity
           key={index}
           onPress={() => {
             handleCategoryPress(item.category);
           }}
-          className={`flex flex-col items-start mr-4 px-4 py-2 rounded-full ${selectedCategory === item.category ? 'bg-primary-300' : 'bg-primary-100 border border-primary-200'}`}
+          className={`flex flex-row items-start mr-4 px-4 py-2 rounded-full ${selectedCategory === item.category ? 'bg-primary-300' : 'bg-primary-100 border border-primary-200'}`}
         >
           <Text
             className={`text-sm ${selectedCategory === item.category ? 'text-white font-rubik-bold mt-0.5' : 'text-black-300 font-rubik'}`}

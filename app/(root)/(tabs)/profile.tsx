@@ -30,7 +30,7 @@ const Profile = () => {
     const result = await logout();
     if (result) {
       Alert.alert('Success', 'Successfully logged out');
-      refetch();
+      // refetch()
     } else {
       Alert.alert('Error', 'An error occurred while logging out');
     }
