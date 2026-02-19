@@ -55,7 +55,7 @@ export async function logout() {
   }
 }
 
-export async function getUser() {
+export async function getCurrentUser() {
   try {
     const response = await account.get();
 
@@ -63,6 +63,7 @@ export async function getUser() {
       const userAvatar = avatar.getInitials(response.name);
       return { ...response, avatar: userAvatar.toString() };
     }
+    return null;
   } catch (err) {
     console.log(err);
     return null;
