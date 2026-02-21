@@ -1,50 +1,64 @@
-# Welcome to your Expo app 👋
+# Real Estate Mobile App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A modern real estate mobile application built with React Native, Expo SDK 54, and Appwrite as the backend.
 
-## Get started
+## Tech Stack
 
-1. Install dependencies
+| Layer | Technology |
+|---|---|
+| **Framework** | React Native + Expo SDK 54 (New Architecture) |
+| **Navigation** | Expo Router 6 (file-based, App Router style) |
+| **Styling** | NativeWind v4 (Tailwind CSS for React Native) |
+| **Backend** | Appwrite (auth, database, storage) |
+| **Auth** | Google OAuth via Appwrite |
+| **State** | React Context API (`GlobalProvider`) |
+| **Data Fetching** | Custom `useAppwrite` hook |
 
-   ```bash
-   npm install
-   ```
+## Implemented Screens and Features
 
-2. Start the app
+- **Sign In screen** — Google OAuth authentication with redirect on success
+- **Home tab** — Featured property carousel + filterable property grid with search and category filters
+- **Explore tab** — Browse all listings with real-time search and filter support
+- **Property Detail screen** — Full property page with image, stats (bedrooms, bathrooms, area), facilities, overview, location, and a Book Now CTA
+- **Profile tab** — User avatar, name, settings menu (Bookings, Payments, Notifications, Security, Language, Help Center, Invite Friends), and logout
 
-   ```bash
-   npx expo start
-   ```
+## Project Structure
 
-In the output, you'll find options to open the app in a
+```
+app/
+  _layout.tsx                  # Root layout: fonts, splash screen, GlobalProvider, Stack
+  sign-in.tsx                  # Google OAuth sign-in screen
+  (root)/
+    _layout.tsx                # Protected layout with auth redirect
+    (tabs)/
+      _layout.tsx              # Bottom tab bar (Home, Explore, Profile)
+      index.tsx                # Home tab — featured + recommended properties
+      explore.tsx              # Explore tab — full property search
+      profile.tsx              # Profile tab — user info and settings
+    properties/
+      [id].tsx                 # Property detail page (dynamic route)
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+lib/
+  appwrite.ts                  # Appwrite client, auth (login/logout/getCurrentUser), DB queries
+  useAppwrite.ts               # Generic data-fetching hook with loading/refetch state
+  global-provider.tsx          # Auth context: isLoggedIn, user, loading, refetch
+  seed.ts                      # Database seeding utility
+  data.ts                      # Additional data helpers
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+constants/
+  images.ts                    # PNG image barrel exports
+  icons.ts                     # PNG icon barrel exports
+  data.ts                      # Static data: categories, settings, facilities, gallery, mock cards
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Getting Started
 
-## Learn more
+```bash
+npm install
+```
 
-To learn more about developing your project with Expo, look at the following resources:
+Configure your Appwrite project — set your endpoint, project ID, and database/collection IDs in `lib/appwrite.ts`.
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+```bash
+npm expo start       # Start Expo dev server (scan QR with Expo Go)
+```
